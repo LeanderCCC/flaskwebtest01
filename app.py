@@ -16,17 +16,20 @@ def hello_world():
     
 # (session["id"] == "" and session["password"] == "")
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        if session["name"] == "" or request.form['name'] == "":
+        if request.form['name'] == "":
             return render_template("login.html")
         else:
             session["name"] = request.form['name']
             return redirect("/")
+        
+    else:
+        return render_template("login.html")
+        
 
-@app.route("/logout", methods=["POST"])
+@app.route("/logout", methods=["GET", "POST"])
 def logout():
-    if request.method == "POST":
-        session["name"] = ""
-        return redirect("/")
+    session["name"] = ""
+    return redirect("/")

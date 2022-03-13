@@ -6,15 +6,10 @@
 
 {% block main %}
 
-<form method="POST">
-    <input name="name"/>
-    <button href="">Click</button>
-</form>
-
 {% if session["name"] %}
-    <h1 style="color:black;">Hello {{session["name"]}}</h1>
+    <h1 style="color:black;display: flex;justify-content: center;">Hello {{session["name"]}}</h1>
 {% else %}
-    <h1 style="color:black;">None</h1>
+    <h1 style="color:black;display: flex;justify-content: center;">None - Please login</h1>
 {% endif %}
 
 {% endblock %}

@@ -6,9 +6,10 @@
 
 {% block main %}
 
-<form method="POST">
-    <input name="name"placeholder="Name"/>
-    <button href="/">Click</button>
+<form method="POST"style="display: flex;justify-content: center;">
+    <input name="name"placeholder="Name"/><br>
+    <input name="password"placeholder="Password"type="password"/><br>
+    <button href="/">Login</button>
 </form>
 
 {% if session["name"] %}

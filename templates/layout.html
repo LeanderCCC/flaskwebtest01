@@ -13,23 +13,19 @@
         <header class="page-header">
             <div class="header-navigation header-navigation-inner">
                 <h1 class="ce_rsce_tao_logo logo">
-                    <a><img src="img/Logo.jpg" width="500" height="169" alt="HTS Husum" itemprop="image"></a>
+                    <a><img src="img/Logo.jpg" width="500" height="169" alt="Logo" itemprop="image"></a>
                 </h1>
     
                 <nav class="mod_rocksolid_mega_menu main-navigation block" id="main-navigation" itemtype="http://schema.org/SiteNavigationElement">
                     <ul class="level_1">
                         <li class="submenu">
-                            <a href="" class="submenu" itemprop="url">Startseite</a>
+                            <a href="/" class="submenu">Startseite</a>
                         </li>
                         <li class="submenu">
                             {% if session["name"] == "" %}
-                                <form action="/login" method="POST">
-                                    <button class='submenu' itemprop='url'type="submit">Login</button>
-                                </form>
+                                    <a href="/login" class='submenu'>Login</a>
                             {% else %}
-                                <form action="/logout" method="POST">
-                                    <button class='submenu' itemprop='url'type="submit">Logout</button>
-                                </form>
+                                    <a href="/logout" class='submenu'>Logout</a>
                             {% endif %}
                         </li>
                     </ul>
