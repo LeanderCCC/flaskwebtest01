@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="page">
+        <header class="page-header">
+            <div class="header-navigation header-navigation-inner">
+                <h1 class="ce_rsce_tao_logo logo">
+                    <a><img src="img/Logo.jpg" width="500" height="169" alt="HTS Husum" itemprop="image"></a>
+                </h1>
+    
+                <nav class="mod_rocksolid_mega_menu main-navigation block" id="main-navigation" itemtype="http://schema.org/SiteNavigationElement">
+                    <ul class="level_1">
+                        <li class="submenu">
+                            <a href="" class="submenu" itemprop="url">Startseite</a>
+                        </li>
+                        <li class="submenu">
+                            {% if session["name"] == "" %}
+                                <form action="/login" method="POST">
+                                    <button class='submenu' itemprop='url'type="submit">Login</button>
+                                </form>
+                            {% else %}
+                                <form action="/logout" method="POST">
+                                    <button class='submenu' itemprop='url'type="submit">Logout</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        {% block main %}{% endblock %}
+    </div>
+</body>
+</html>

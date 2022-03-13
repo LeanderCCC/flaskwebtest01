@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block main %}
+
+<form method="POST">
+    <input name="name"placeholder="Name"/>
+    <button href="/">Click</button>
+</form>
+
+{% if session["name"] %}
+    
+{% endif %}
+
+{% endblock %}
