@@ -22,13 +22,13 @@
                             <a href="/" class="submenu">Startseite</a>
                         </li>
                         <li class="submenu">
-                            {% if session["name"] == "" %}
+                            {% if session["loggedIn"] %}
+                                <a href="/logout" class='submenu'>Logout</a>
+                            {% else %}
                                     <a href="/login" class='submenu'>Login</a>
                                 </li>
                                 <li class="submenu">
-                                    <a href="/register" class='submenu'>Registrieren</a>
-                            {% else %}
-                                    <a href="/logout" class='submenu'>Logout</a>
+                                    <a href="/register" class='submenu'>Registrieren</a>    
                             {% endif %}
                         </li>
                     </ul>

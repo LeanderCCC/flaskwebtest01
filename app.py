@@ -18,7 +18,21 @@ cursor = db.cursor()
 # Index
 @app.route("/")
 def main():
-    return render_template("index.html")
+    try:
+        if session['name'] != "" and session['password'] != "":
+            username = session['name']
+            cursor.execute(f"SELECT * FROM users WHERE username = '{username}'")
+            rows = cursor.fetchall()
+    
+            if check_password_hash(rows[0][2], request.form['password']):
+                session["id"] = rows[0][0]
+                session["name"] = rows[0][1]
+                session["password"] = rows[0][2]
+                session["loggedIn"] = True
+        else:
+            session["loggedIn"] = False
+    finally:
+        return render_template("index.html")
 
 
 # Login
@@ -27,12 +41,23 @@ def login():
     session.clear()
     if request.method == "POST":
         username = request.form['name']
-        cursor.execute(f"SELECT * FROM users WHERE username = '{username}'")
-        rows = cursor.fetchall()
-        if check_password_hash(rows[0][2], request.form['password']):
-            session["id"] = rows[0][0]
-            session["name"] = rows[0][1]
-        return redirect("/")
+        try:
+            cursor.execute(f"SELECT * FROM users WHERE username = '{username}'")
+            rows = cursor.fetchall()
+        
+            if check_password_hash(rows[0][2], request.form['password']):
+                session["id"] = rows[0][0]
+                session["name"] = rows[0][1]
+                session["password"] = rows[0][2]
+                session["loggedIn"] = True
+                return redirect("/")
+            else:
+                session["fehler"] = True
+                return render_template("login.html")
+            
+        except:
+            session["fehler"] = True
+            return render_template("login.html")
         
     else:
         return render_template("login.html")
@@ -42,6 +67,7 @@ def login():
 @app.route("/logout", methods=["GET", "POST"])
 def logout():
     session["name"] = ""
+    session["loggedIn"] = False
     return redirect("/")
 
 
@@ -58,6 +84,7 @@ def register():
         rows = cursor.fetchall()
         session["id"] = rows[0][0]
         session["name"] = rows[0][1]
+        session["loggedIn"] = True
         return render_template("index.html")
     else:
         return render_template("register.html")
