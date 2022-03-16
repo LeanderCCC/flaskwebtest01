@@ -24,6 +24,9 @@
                         <li class="submenu">
                             {% if session["name"] == "" %}
                                     <a href="/login" class='submenu'>Login</a>
+                                </li>
+                                <li class="submenu">
+                                    <a href="/register" class='submenu'>Registrieren</a>
                             {% else %}
                                     <a href="/logout" class='submenu'>Logout</a>
                             {% endif %}
